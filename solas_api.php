@@ -59,9 +59,11 @@ echo '<br>';
 require_once 'HTTP/Request2.php';
 require_once 'SolasAPI.class.php';
 require_once 'doStuffToXLIFF_file.php';
+require_once 'settings.class.php';
 
 function  processJobs ($componentName){
-    $locConnect="http://127.0.0.1/LocConnect/";
+    $urlSettings = new Settings();
+    $locConnect= $urlSettings->get('general.BASE_URL');
     // LocConnect uses Pear for its calls
   
 
