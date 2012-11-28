@@ -67,6 +67,7 @@ class Extractor{
                         $header = simplexml_import_dom($headers->item(0));
                         // Get the main body of text from the XLIFF file found in the converted-file tag
                         $text = $header->reference->{'internal-file'}->{'converted-file'};
+                        $text = base64_decode($text);
 
                         // Send the text, filename and id to the ExtractionService class to be extracted into XLIFF, then load into a DOMDocument
                         $converted = new DOMDocument();
