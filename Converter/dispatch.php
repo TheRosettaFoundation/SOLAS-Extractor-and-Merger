@@ -1,5 +1,5 @@
 <?php
-
+mb_internal_encoding("UTF-8");
 // load Tonic library
 require_once 'lib/tonic.php';
 
@@ -11,7 +11,7 @@ require_once 'WebService/Merger.php';
 
 
 // handle request
-$request = new Request(array('baseUri' => ''));
+$request = new Request(array('baseUri' => '/converter/Converter/dispatch.php/'));
 try {
     $resource = $request->loadResource();
     $response = $resource->exec($request);

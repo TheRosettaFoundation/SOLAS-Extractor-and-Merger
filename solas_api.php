@@ -69,7 +69,7 @@ function  processJobs ($componentName){
 
     $solasApi = new SolasAPI; // set up SolasAPI class for function calling
 
-    //First step, call LocConnect to fetch a list of available jobs for this component, ComponentName
+    //First step, call LocConnect to fetch a list of available jobIDs for this component, ComponentName
     $jobs = $solasApi->solas_fetch_jobs($componentName, $locConnect);
     echo '<br> $jobs: '.$jobs; //IOK for testing
 
@@ -104,10 +104,12 @@ function  processJobs ($componentName){
             echo '<br> Job ID to be processed: '.$jobId; //IOK for testing
 
 
+            echo "in here -----------------------";
             //Tell locConnect I will process this jobId
             $response = $solasApi->solas_set_status_processing($componentName, $jobId, $locConnect);
             echo '<br> solas_set_status_processing Response: '.$response; //IOK for testing
             //may need to insert error handling here in case solas_set_status is unsuccessful
+            echo "in here ++++++++++++++++++===";
 
     }
 
@@ -115,16 +117,11 @@ function  processJobs ($componentName){
 
     //Get job if jobId is set
     if(isset($jobId)) {
-            $file = $solasApi->solas_get_job($componentName, $jobId, $locConnect); // $file now contains the XLIFF file to be processed
+            echo "fetch jobs __________________";
+            $file = $solasApi->solas_get_job($componentName, $jobId, $locConnect); // get the contents of the jobs from their JobIDs
 
     //IOK create $data in XML format for test purposes
-                            $xliffFile = "<methodCall>\r\n".
-                                            " <methodName>foo.bar</methodName>\r\n".
-                                            " <params>\r\n".
-                                            "  <param><value><string>Hello, locConnect!</string></value></param>\r\n".
-                                            "  <param><value><int>123</int></value></param>\r\n".
-                                            " </params>\r\n".
-                                            "</methodCall>";
+                   
 
             //Do stuff to the XLIFF file
             $updatedXliffFile = Extractor::doStuffToXLIFF($file, $jobId, $componentName);

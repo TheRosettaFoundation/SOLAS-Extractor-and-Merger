@@ -25,6 +25,8 @@ class Extractor{
             //if we have an xlf doc then merge
 
             return MergerService::merge($xliffFile, $id, $componentName);
+            
+            // VALIDATION: Check if the header data specifies if the file should be validated
 
 
         } else {
@@ -72,7 +74,8 @@ class Extractor{
                         // Send the text, filename and id to the ExtractionService class to be extracted into XLIFF, then load into a DOMDocument
                         $converted = new DOMDocument();
                         $converted->loadXML(ExtractionService::extract($text, $filename, $id));
-
+                        
+                        
                         // import the header Node into the scope of the XLIFF that has just been extracted
                         $head=$converted->importNode($headers->item(0), true);
                         // Insert the header Nodes just after the file tags and before the body tags
