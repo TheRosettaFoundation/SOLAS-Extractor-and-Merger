@@ -80,8 +80,11 @@ class Extractor{
                         $head=$converted->importNode($headers->item(0), true);
                         // Insert the header Nodes just after the file tags and before the body tags
                         $fileElem = $converted->getElementsByTagName( 'file' )->item(0);
+                        $originalFileElem = $xliff->getElementsByTagName( 'file' )->item(0);
                         $fileElem->insertBefore($head,$converted->getElementsByTagName( 'body' )->item(0));
-
+                        $fileElem->setAttribute("source-language", $originalFileElem->getAttribute("source-language"));
+                        $fileElem->setAttribute("target-language", $originalFileElem->getAttribute("target-language"));
+                        $fileElem->setAttribute("category", $originalFileElem->getAttribute("category"));
                         // return the converted file
                         return $converted->saveXML();
                     }
