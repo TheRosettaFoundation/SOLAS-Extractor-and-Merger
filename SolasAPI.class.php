@@ -10,6 +10,7 @@ This is a locConnect Solas API Class
 It wraps the API calls to make component creation easier
 
 */
+
 class SolasAPI {
 
 	//locConnect Solas API public functions
@@ -90,6 +91,26 @@ class SolasAPI {
 	}
 
 	//***********************************************************************************************************
+        
+        //Calls LocConnect to request a file to be processed via JobId and ComponentName
+	public function solas_get_resource($jobId, $locConnect, $type){
+		$request = new HTTP_Request2($locConnect.'get_resource.php', HTTP_Request2::METHOD_GET);
+
+		$request->setHeader('Accept-Charset', 'utf-8');
+		$url = $request->getUrl();
+
+		// set request variables here
+		//$url->setQueryVariable('com', $ComponentName); // com = component. ComponentName = LCM, MT, LKR, WFR etc... should be uppercase ASCII string (max 6 chars)
+		$url->setQueryVariable('id', $jobId); 	// set jobId here
+                $url->setQueryVariable('type', $type); 	// set jobId here
+		
+		// This will fetch the given job from the CNLF server and store content in $file variable;
+		$response=$request->send()->getBody();
+		return $response;
+	}
+
+	//***********************************************************************************************************
+        
 	//Calls LocConnect to send feedback msg relating to the current JobId and ComponentName
 	public function solas_send_feedback($ComponentName, $jobId, $msg, $locConnect){
 		$request = new HTTP_Request2($locConnect.'send_feedback.php', HTTP_Request2::METHOD_GET);
@@ -116,6 +137,8 @@ class SolasAPI {
 			->addPostParameter('id', $jobId)
 			->addPostParameter('com', $ComponentName)
 			->addPostParameter('data', $data);
+                echo "------------here-------------";
+                echo $data;
 
 		try {
 			$response = $request->send();

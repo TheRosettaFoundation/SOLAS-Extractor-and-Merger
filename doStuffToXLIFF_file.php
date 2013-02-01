@@ -16,14 +16,12 @@ Feel free to add your real processing here
 class Extractor{
     function doStuffToXLIFF($xliffFile, $id, $componentName){
 
-
         $code = Response::OK;
 
-
+        $solasApi = new SolasAPI; // set up SolasAPI class for function calling
         if(strcasecmp($componentName,"MGR")==0) 
         {
             //if we have an xlf doc then merge
-
             return MergerService::merge($xliffFile, $id, $componentName);
             
             // VALIDATION: Check if the header data specifies if the file should be validated
@@ -65,6 +63,20 @@ class Extractor{
                     }
                     else
                     {
+                        $rulesFile = $solasApi->solas_get_resource($id, $baseURL, "ITS");
+                        $data=trim(preg_replace('/<\?xml version.*;?>/i', "", $rulesFile));
+                        $pos = strpos($data, "<content>");
+                        if($pos !== false)
+                        {
+                            $data = substr_replace($data, "", $pos, strlen("<content>"));
+                        }
+
+                        $pos = strrpos($data, "</content>");
+                        if($pos !== false)
+                        {
+                            $data = substr_replace($data, "", $pos, strlen("</content>"));
+                        }
+                        
                         // load the header Node into simpleXML
                         $header = simplexml_import_dom($headers->item(0));
                         // Get the main body of text from the XLIFF file found in the converted-file tag
@@ -73,7 +85,7 @@ class Extractor{
 
                         // Send the text, filename and id to the ExtractionService class to be extracted into XLIFF, then load into a DOMDocument
                         $converted = new DOMDocument();
-                        $converted->loadXML(ExtractionService::extract($text, $filename, $id));
+                        $converted->loadXML(ExtractionService::extract($text, $filename, $id, $data));
                         
                         
                         // import the header Node into the scope of the XLIFF that has just been extracted

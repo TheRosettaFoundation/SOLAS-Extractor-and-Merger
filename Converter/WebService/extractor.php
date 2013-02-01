@@ -16,11 +16,40 @@ static public function endsWith($string, $input)
 }
 
 public static function extract($data,$filename,$jobid, $rules=null){
-    
+
+    $resourceFilename;
     //echo "in extractor <br>";
     $urlSettings = new Settings();
     $uploads = $urlSettings->get('general.uploads');
-
+    $baseURL = $urlSettings->get('general.BASE_URL');
+    $resourceFilename = file_get_contents($baseURL."get_resource_filename.php?id=$jobid&type=ITS");
+     
+//    $requestFilename = new HTTP_Request2($baseURL."get_resource_filename.php?id=$jobid&type=ITS");
+//    
+//    $requestFilename->setMethod(HTTP_Request2::METHOD_GET);
+//    $responseFilename = $requestFilename->send();
+//    if(200 == $responseFilename->getStatus())
+//    {    
+//        print_r($responseFilename->getBody());
+//
+//        //trim the response for the rules file filename
+//        $resourceFilename = $responseFilename->getBody();
+//        $pos = strpos($resourceFilename, "<content>");
+//        if($pos !== false)
+//        {
+//            $resourceFilename = substr_replace($resourceFilename, "", $pos, strlen("<content>"));
+//        }
+//
+//        $pos = strrpos($resourceFilename, "</content>");
+//        if($pos !== false)
+//        {
+//            $resourceFilename = substr_replace($resourceFilename, "", $pos, strlen("</content>"));
+//        }
+//        
+//
+//    }
+    echo "RequestFilename:".$resourceFilename;
+    
     shell_exec("mkdir $uploads/$jobid && chmod 777 -R $uploads/$jobid");
 
     // save file with name based off filename
@@ -79,7 +108,8 @@ public static function extract($data,$filename,$jobid, $rules=null){
     {
             $version = 1.2;
     }
-
+    
+    file_put_contents("$uploads/$jobid/$resourceFilename", $rules);
     echo shell_exec("tikel/xliff$version/tikal.sh {$argString} -x -ie UTF-8 -oe UTF-8 $uploads/$jobid/$filename");
 
 

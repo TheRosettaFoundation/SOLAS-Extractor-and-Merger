@@ -21,6 +21,7 @@ static public function endsWith($string, $input)
 static public function merge($data, $jobid, &$code)
 {
     
+        
     $versionImport =null;
 	if(isset($_GET['version']))	$versionImport =$_GET['version'];
 
@@ -39,7 +40,8 @@ static public function merge($data, $jobid, &$code)
 
         $urlSettings = new Settings();
         $uploads = $urlSettings->get('general.uploads');
-        
+        echo $uploads;
+        echo $jobid;
 	// check jobid exists
 	if( file_exists($uploads."$jobid"))
 	{
