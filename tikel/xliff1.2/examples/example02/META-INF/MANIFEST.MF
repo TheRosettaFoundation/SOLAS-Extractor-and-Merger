@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1360111723855
+Build-Jdk: 1.6.0_17
+Built-By: Yves
+Bundle-ManifestVersion: 2
+Bundle-Name: Okapi Example 02
+Bundle-SymbolicName: net.sf.okapi.examples.okapi-example-02
+Bundle-Version: 0.20.0.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Import-Package: net.sf.okapi.common,net.sf.okapi.common.filters,net.sf.o
+ kapi.common.filterwriter,net.sf.okapi.common.resource,net.sf.okapi.filt
+ ers.openoffice,net.sf.okapi.filters.properties
+Tool: Bnd-1.50.0

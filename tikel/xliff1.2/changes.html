@@ -4,7 +4,7 @@
 <title>Okapi Changes Log</title>
 </head>
 <body>
-<h1>Okapi Framework Changes Log - Jul-09-2012</h1>
+<h1>Okapi Framework Changes Log - Feb-05-2013</h1>
 <p>Note this document is common to both the <b>okapi-lib</b> distribution and 
 the <b>okapi-apps</b> distribution. The information pertaining to 
 applications other than Tikal are relevant only for the <b>okapi-apps</b> 
@@ -21,6 +21,333 @@ distribution.</p>
 	<li>Google Code Project site: <a href="http://code.google.com/p/okapi/">
 	http://code.google.com/p/okapi/</a></li>
 </ul>
+<h2>Changes from M19 to M20-SNAPSHOT</h2>
+<ul>
+	<li>Rainbow:<ul>
+	<li>Improved the logging output and UI responsivness during lengthy 
+	processes.</li>
+	<li>Updated the user&#39;s preference dialog to allow the selection of the log 
+	levels as defined by SLF4J (Normal, Debug, Trace)</li>
+</ul>
+	</li>
+	<li>Tikal:<ul>
+	<li>Fixed -lfc command output.</li>
+    <li>Use the -continue option to specify that batch operations should 
+        continue processing even if one or more files in the batch fail
+        to process.</li>
+    <li>Summary information will be included at the end of batch commands.</li>
+    <li>Timing information is included for each file processed, and total 
+        elapsed time is included in the batch summary.</li>
+    <li>Added the -pd option to specify a directory to search for custom
+        filter configurations.</li>
+</ul>
+	</li>
+	<li>Filters:<ul>
+	<li>ITS Filters (XML Filter and HTML5+ITS Filter):<ul>
+	<li>Continued the implementation of ITS 2.0</li>
+	<li>Fixed issue where the HTML-type special characters were not escaped when 
+	converted to inline codes by the code finder.</li>
+	<li>Fixed issue #311 where preserve space property was not applied to 
+	attributes.</li>
+</ul>
+	</li>
+	<li>TXML Filter:<ul>
+	<li>Fixed issue #266: Translations in the <code>&lt;revisions&gt;</code> elements 
+	are now ignored.</li>
+</ul>
+	</li>
+	<li>XLIFF Filter:<ul>
+	<li>Improved support for <code>&lt;mrk&gt;</code> elements.</li>
+	<li>Added support for several ITS features.</li>
+</ul>
+	</li>
+</ul>
+	</li>
+	<li>Connectors:<ul>
+	<li>Microsoft Translator Connector:<ul>
+	<li>Fixed the internal conversion of the language code.</li>
+</ul>
+	</li>
+</ul>
+	</li>
+	<li>Libraries:<ul>
+	<li>Fixed issue #282 for the Abstract Markup Filter.</li>
+	<li>Fixed issues in reporting libraries.</li>
+	<li>Added support for including ITS annotations in the XLIFF 1.2 writer.</li>
+</ul>
+	</li>
+	<li>Steps:<ul>
+	<li>Rainbow Translation Kit Creation:<ul>
+	<li>Added the &quot;Include post-processing hook&quot; option for OmegaT packages. 
+	this allows OmegaT to merge back the documents automatically.</li>
+</ul>
+	</li>
+	<li>Remove Target:<ul>
+	<li>Fixed issue #270 where the step could not be run without some of the 
+	optional parameters set.</li>
+</ul>
+	</li>
+	<li>Microsoft Batch Translation:<ul>
+	<li>Added an option to send the generated TMX document as a raw document for 
+	the input of the next step.</li>
+	<li>Added a option to point to a .properties file containing a mapping of keys to categories for more convenient lookup. See wiki.</li>	
+</ul>
+	</li>
+	<li>Quality Check Step:<ul>
+	<li>Fixed issue #304 where the default check on parentheses didn&#39;t include 
+	full-width characters.</li>
+</ul>
+	</li>
+	<li>Inline Code Removal Step:<ul>
+	<li>Added option to replace line break related codes with spaces. By default codes are simply removed.</li>
+</ul>
+	</li>
+	<li>Added the Space Check Step. It allows to fix automatically spaces around 
+	inline codes of the target based on the source.</li>
+	<li>Added the Cleanup Step. It allows to normalize quotation marks, 
+	punctuations, remove suspect entries, etc. this can be used for example when 
+	preparing an aligned document for MT training.</li>
+</ul>
+	</li>
+</ul>
+<h2>Changes from M18 to M19</h2>
+<ul>
+	<li>Rainbow:<ul>
+	<li>Changed the logging system.</li>
+	<li>Updated the Translation Comparison pre-defined pipeline, to include a 
+	word-count step before the comparison.</li>
+</ul>
+	</li>
+	<li>Tikal:<ul>
+	<li>Changed the logging system.</li>
+	<li>Fixed issue #278: Added default mapping for the RTF Filter.</li>
+	<li>Changed loading of the filters so all are taken into account on 
+	initialization.</li>
+	<li>Added -logger flag, to output all messages to the current logger instead of the console.
+	Might be pretty noisy, but you have full control by tweaking the logger configuration.</li>
+	<li>Changed the existing -trace flag to also output all debug messages from other components
+	when in console mode (no effect on logger).</li>
+</ul>
+	</li>
+	<li>CheckMate:<ul>
+	<li>Changed the logging system.</li>
+	<li>Added several features (See Library / Checker below for details).</li>
+</ul>
+	</li>
+	<li>Filters Plugin for OmegaT:<ul>
+	<li>Changed the logging system.</li>
+</ul>
+	</li>
+	<li>Steps:<ul>
+	<li>Added the
+	<a href="http://www.opentag.com/okapi/wiki/index.php?title=Segments_to_Text_Units_Converter_Step">Segments to 
+	Text Units Converter Step</a>.</li>
+	<li>Added the
+	<a href="http://www.opentag.com/okapi/wiki/index.php?title=Enrycher_Step">
+	Enrycher Step</a> (Alpha).</li>
+	<li>Id-Based Aligner:<ul>
+	<li>Fixed issue where the multilingual files where detected on the source 
+	input rather than the target.</li>
+	<li>Added Fuzzy scores to the reports. Added statistics to the html report. Added wordcount analysis if there 
+	is a SimpleWordCountStep before the TranslationComparisonStep. Added SimpleWordCountStep to the predefined translation comparison pipeline.</li>
+</ul>
+	</li>
+	<li>Rainbow Translation Kit merging Step:<ul>
+	<li>Fixed issue #281: pre-segmented source is now re-segmented with original 
+	IDs if needed, avoiding to have different segment IDs between source and 
+	target, that cause incorrect source segment ID in the final output if it is 
+	a segmented document like XLIFF.</li>
+</ul>
+	</li>
+	<li>Simple Word Count Step:<ul>
+	<li>Removed the access to the un-supported option of counting target 
+	content.</li>
+</ul>
+	</li>
+	<li>Translation Comparison Step:<ul>
+	<li>Added output based on source word-count, if one is available.</li>
+</ul>
+	</li>
+	<li>MS Batch Translation Step:<ul>
+	<li>Fixed the issue of not passing the category to the connector.</li>
+</ul>
+	</li>
+</ul>
+	</li>
+	<li>Filters:<ul>
+	<li>MIF Filter:<ul>
+	<li>Restored the escaping of the original data of inline codes (Issue #285)</li>
+	<li>Reworked the parsing of the lone Strings content for escaped characters. 
+	Now all control characters are mapped or made inline codes. Then if the MIF 
+	version is less than 8, the decoding using the character set is used, 
+	otherwise, the character is enclosed in an inlien code as we can&#39;t know what 
+	it is.</li>
+</ul>
+	</li>
+	<li>Added the HTML5-ITS Filter.</li>
+	<li>Added the Doxygen Filter.</li>
+	<li>Added the Wiki Filter.</li>
+	<li>HTML Filter:<ul>
+	<li>Fixed issue #276: Code finder is now applied also to extracted text from 
+	attributes.</li>
+</ul>
+	</li>
+	<li>XML Stream Filter:<ul>
+	<li>Fixed issue #290: Incorrect output when configuring empty element with 
+	[INLINE, EXCLUDE]</li>
+</ul>
+	</li>
+	<li>XML Filter:<ul>
+	<li>Refactored the filter to use a shared code with the HTML5+ITS Filter</li>
+	<li>Implemented numerous changes for the ITS 2.0 support.</li>
+</ul>
+	</li>
+	<li>XLIFF Filter:<ul>
+	<li>Added read support for the <code>its:allowedCharacters</code> attribute.</li>
+</ul>
+	</li>
+</ul>
+	</li>
+	<li>Libraries:<ul>
+	<li>Change the logging system to use SLF4J everywhere.</li>
+	<li>ITS Engine/Filter:<ul>
+	<li>Implemented support for HTML5 syntax</li>
+	<li>Updated most ITS 2.0 data categories to follow the progress of the 
+	Editor&#39;s draft specification (<a href="http://www.w3.org/International/multilingualweb/lt/drafts/its20/its20.html">http://www.w3.org/International/multilingualweb/lt/drafts/its20/its20.html</a>)</li>
+</ul>
+	</li>
+	<li>Checker:<ul>
+	<li>Added check for the ITS Allowed Characters data category.</li>
+</ul>
+	</li>
+	<li>Removed the Threaded Pipeline package.</li>
+</ul>
+	</li>
+</ul>
+<h2>Changes from M17 to M18</h2>
+<ul>
+	<li>Rainbow:<ul>
+	<li>Changed the batch mode so the log and error output go to the 
+	rainbowBatchLog.txt file in the user home directory.</li>
+	<li>Added the <code>-rd</code> option (root directory) to the command-line 
+	mode.</li>
+</ul>
+	</li>
+	<li>Tikal:<ul>
+	<li>Resolved issue #252: Added <code>-rd</code> option to set the root 
+	directory (Patch from Mihai)</li>
+	<li>Fixed issue #254: Added support to change the display encoding using the
+	<code>.Tikal</code> configuration file and the <code>displayEncoding</code> 
+	setting.</li>
+	<li>Fixed issue #213: Added the <code>-noalttrans</code> option for the 
+	&quot;Leverage Files From Moses&quot; command.</li>
+</ul>
+	</li>
+	<li>CheckMate:<ul>
+	<li>Added several features (See Library / Checker below for details).</li>
+</ul>
+	</li>
+	<li>Longhorn:<ul>
+	<li>Made API available to execute pipelines with multiple target languages.</li>
+</ul>
+	</li>
+	<li>Filters:<ul>
+	<li>RainbowKit Filter:<ul>
+	<li>Added pre-defined configuration &quot;noprompt&quot; for processing without 
+	prompting.</li>
+</ul>
+	</li>
+	<li>XML Filter:<ul>
+	<li>Added implementation for the ITS 2.0 Domain data category.</li>
+	<li>Added implementation for the ITS 2.0 External Resources 
+	Reference data category.</li>
+	<li>Added implementation for the ITS 2.0 Locale Filter data category.</li>
+	<li>Added implementation for the ITS 2.0 Preserve Space data category.</li>
+	<li>Added implementation for the ITS 2.0 Storage Size data category.</li>
+</ul>
+	</li>
+	<li>XLIFF Filter:<ul>
+	<li>Added support for the <code>maxbytes</code> and ITS Storage Size data 
+	category.</li>
+</ul>
+	</li>
+	<li>MIF Filter:<ul>
+	<li>Fixed: For MIF 10 files, the wrong encoding was used to read the files.</li>
+</ul>
+	<li>TMX Filter:<ul>
+	<li>Added option to set TextUnit Segmentation flag based on the filter 
+	configuration.<br>
+	<b>Important: This introduce a change in behavior. Now, by default, TMX 
+	entries that are set to segType=&quot;segment&quot; or not set at all will be marked 
+	as segment in the extracted resource. this may affect some output, for 
+	example XLIFF, where such entries will be noted as segmented as well.</b></li>
+</ul></li>
+</ul>
+	</li>
+	<li>Steps:<ul>
+	<li>Batch Translation Step:<ul>
+	<li>Fixed issue #260 where an error occured at the end of the batch process 
+	when the option &#39;send TMX to the next step&#39; was not set.</li>
+</ul></li>
+	<li>Translation Comparison Step:<ul>
+	<li>Added support for <code>${rootDir}</code>, <code>${inputRootDir}</code> 
+	and locale variables.</li>
+</ul></li>
+	<li>Format Conversion Step:<ul>
+	<li>Added the UI for the option &quot;Do not output entries without text&quot;.</li>
+</ul></li>
+	<li>Segmentation and Desegmentation Step:<ul>
+		<li>Will now affect all target locales, that you are processing.</li>
+	</ul></li>
+</ul></li>
+	<li>Connectors:<ul>
+	<li>Microsoft Translator Connector:<ul>
+	<li>Updated code and interface to use Azure Marketplace Access Tokens 
+	instead of AppIDs.</li>
+</ul>
+	</li>
+</ul>
+	</li>
+	<li>Libraries:<ul>
+	<li>Upgraded the SWT library from 3.7 to 4.2.</li>
+	<li>XLIFFWriter:<ul>
+	<li>Added support for <i>its:domain</i> and <i>its:externalResourcesRef</i> 
+	properties</li>
+</ul>
+	</li>
+
+	<li>Checker:
+		<ul>
+			<li>Added XLIFF validation against XLIFF schema (<code>xliff-core-1.2-transitional.xsd</code>) (feature, issue #263)</li>
+			<li>Adding the ability to generate XML report (feature, issue #264)</li>
+			<li>Fixed issue #257: different leading/trailing spaces does not detect inconsistent non-breaking spaces.</li>
+			<li>Added support for validating the ITS Storage Size property for 
+			text unit.</li>
+		</ul>
+	</li>
+
+	<li>Removed extra files leftover from xliff-lib and olifant migration.</li>
+	<li>Added the TARGET_LOCALES step parameter and depracted the TARGET_LOCALE 
+	one.</li>
+	<li>ITSEngine class for ITS 2.0:<ul>
+	<li>Added support for the Target Pointer data category.</li>
+	<li>Added support for the Domain data category.</li>
+	<li>Added support for the External Resources Reference data category.</li>
+	<li>Added support for the Locale Filter data category.</li>
+	<li>Added support for the Preserve Space data category.</li>
+	<li>Added support for the Localization Quality Issue data category.</li>
+	<li>Added support for the Storage Size data category.</li>
+</ul>
+	</li>
+	<li>Added options to pre- and post-process text that is being letter-coded
+	to prevent interference with letter-decoding.</li>
+</ul>
+	</li>
+	<li>Trados Utilities Plugin:<ul>
+		<li>Added the
+		<a href="http://www.opentag.com/okapi/wiki/index.php?title=Trados_Utilities_Plugin">Trados/Word steps</a> to the main build.</li>
+	</ul></li>
+</ul>
 <h2>Changes from M16 to M17</h2>
 <ul>
 	<li>Rainbow:<ul>
@@ -29,7 +356,7 @@ distribution.</p>
 </ul>
 	</li>
 	<li>Longhorn:<ul>
-	<li>fixed concurrancy issues.</li>
+	<li>fixed concurrency issues.</li>
 	<li>fixed problem of reading existing projects.</li>
 </ul>
 	</li>
@@ -45,9 +372,6 @@ distribution.</p>
 			<li>Fixed issue #219 where empty &lt;target&gt; where not created instead of being 
 	created empty (Patch from Mihai)</li>
 			<li>Fixed the reading of the <i>coord</i> target property.</li>
-			<li>Implemented local withinText in the ITS engine for ITS 2.0</li>
-			<li>Implemented initial support for XPath variables for ITS 2.0</li>
-			<li>Implemented idValue data category for ITS 2.0</li>
 		</ul></li>
 		<li>Plain Text Filter:<ul>
 			<li>Fixed the link for the help button.</li>
@@ -68,6 +392,9 @@ distribution.</p>
 		<li>XML Filter:<ul>
 			<li>Fixed issue #240 where code finder matches were not escaped properly in 
 	some cases.</li>
+			<li>Implemented local withinText in the ITS engine for ITS 2.0</li>
+			<li>Implemented initial support for XPath variables for ITS 2.0</li>
+			<li>Implemented idValue data category for ITS 2.0</li>
 		</ul></li>
 		<li>Removed the Drupal filter. This filter will be addressed in a different 
 	way later.</li>
