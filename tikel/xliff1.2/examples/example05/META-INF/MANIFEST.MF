@@ -1,11 +1,11 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1360111725399
-Build-Jdk: 1.6.0_17
-Built-By: Yves
+Bnd-LastModified: 1368970750917
+Build-Jdk: 1.7.0_21
+Built-By: ysavourel
 Bundle-ManifestVersion: 2
 Bundle-Name: Okapi Example 05
 Bundle-SymbolicName: net.sf.okapi.examples.okapi-example-05
-Bundle-Version: 0.20.0.SNAPSHOT
+Bundle-Version: 0.22.0.SNAPSHOT
 Created-By: Apache Maven Bundle Plugin
 Import-Package: net.sf.okapi.common,net.sf.okapi.common.query,net.sf.oka
  pi.common.resource,net.sf.okapi.connectors.apertium,net.sf.okapi.connec

@@ -86,12 +86,18 @@ static public function merge($data, $jobid, &$code)
                                         
 					shell_exec ("./tikel/xliff$version/tikal.sh -m  -ie UTF-8 -oe UTF-8 $fileName.xlf");
                                         
+                                        echo "<br>";
+                                        echo "./tikel/xliff$version/tikal.sh -m  -ie UTF-8 -oe UTF-8 $fileName.xlf";
+                                        echo "<br>";
 
 					$lastIndex = strrpos($fileName, ".");
 					
 					$fileName = substr_replace($fileName, ".out.", $lastIndex, 1);
-
-					return file_get_contents("$fileName");
+                                        $output = file_get_contents("$fileName");
+                                        $output = str_replace("&#39;", "'", $output);
+                                        
+                                        file_put_contents($fileName, $output);
+					return $output;
 
 
 				}

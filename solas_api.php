@@ -130,6 +130,7 @@ function  processJobs ($componentName){
 
 
             //Send the updated XLIFF file back to locConnect
+            echo " data sent to db = $updatedXliffFile";
             $response = $solasApi->solas_send_output($componentName, $jobId, $updatedXliffFile, $locConnect);
             echo '<br> solas_send_output Response: '.$response; //IOK for testing	
 

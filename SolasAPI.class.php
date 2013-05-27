@@ -137,8 +137,8 @@ class SolasAPI {
 			->addPostParameter('id', $jobId)
 			->addPostParameter('com', $ComponentName)
 			->addPostParameter('data', $data);
-                echo "------------here-------------";
-                echo $data;
+//                echo "------------here-------------";
+//                echo $data;
 
 		try {
 			$response = $request->send();

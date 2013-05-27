@@ -1,11 +1,11 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1360111724465
-Build-Jdk: 1.6.0_17
-Built-By: Yves
+Bnd-LastModified: 1368970750604
+Build-Jdk: 1.7.0_21
+Built-By: ysavourel
 Bundle-ManifestVersion: 2
 Bundle-Name: Okapi Example 03
 Bundle-SymbolicName: net.sf.okapi.examples.okapi-example-03
-Bundle-Version: 0.20.0.SNAPSHOT
+Bundle-Version: 0.22.0.SNAPSHOT
 Created-By: Apache Maven Bundle Plugin
 Import-Package: javax.xml.transform,javax.xml.transform.stream,net.sf.ok
  api.common,net.sf.okapi.common.filters,net.sf.okapi.common.pipeline,net

@@ -4,7 +4,7 @@
 <title>Okapi Changes Log</title>
 </head>
 <body>
-<h1>Okapi Framework Changes Log - Feb-05-2013</h1>
+<h1>Okapi Framework Changes Log - May-19-2013</h1>
 <p>Note this document is common to both the <b>okapi-lib</b> distribution and 
 the <b>okapi-apps</b> distribution. The information pertaining to 
 applications other than Tikal are relevant only for the <b>okapi-apps</b> 
@@ -21,13 +21,198 @@ distribution.</p>
 	<li>Google Code Project site: <a href="http://code.google.com/p/okapi/">
 	http://code.google.com/p/okapi/</a></li>
 </ul>
-<h2>Changes from M19 to M20-SNAPSHOT</h2>
+<h2>Changes from M21 to M22-SNAPSHOT</h2>
+<ul>
+	<li>Tikal:<ul>
+    <li>Made it possible to run tikal.sh from another directory on Mac OS X.</li>
+</ul>
+	</li>	
+	<li>Filters:<ul>
+	<li>OpenXML Filter:<ul>
+	<li>Fixed issue #325: The slides of PPTX documents are now extracted in 
+	order.</li>
+	<li>Fixed issue #169: segmentation around inline codes seems to work 
+	properly.</li>
+</ul>
+	<li>XML Stream Filter (Abstract Markup Filter):<ul>
+        <li>Fixed issue #332: When using the global_cdata_subfilter option, the filter will no longer generate extra segments consisting only of placeholders.</li>
+</ul>
+	</li>
+	<li>ITS Filters (XML Filter and HTML5+ITS Filter):<ul>
+	<li>Continued implementation of ITS 2.0 (See
+	<a href="http://www.opentag.com/okapi/wiki/index.php?title=ITS_Components">http://www.opentag.com/okapi/wiki/index.php?title=ITS_Components</a> for 
+	details)</li>
+</ul>
+	</li>
+</ul>
+	</li>
+	<li>Steps:<ul>
+		<li>Term Extraction Step:<ul>
+			<li>Added support for Text Analysis annotations.</li>
+			<li>Made the three extraction methods options, and attached the relevant 
+	options to the statistical method.</li>
+		</ul></li>
+		<li>Full-Width Conversion Step:<ul>
+			<li>Added log message if at least one character was modified (per input 
+	file). This resolves issue #327.</li>
+		</ul></li>
+		<li>Batch TM Leveraging Step:<ul>
+		<li>Fixed issue #331: Entries with no text are now not sent for 
+		translation.</li>
+	</ul></li>
+		<li>Added Simple Senetence Alignment Step</li>
+		<li>Added Paragraph Aligner Step</li>
+	</ul></li>
+	<li>Filters Plugin for OmegaT:<ul>
+		<li>Added *.xliff and *.sdlxliff as default extensions.</li>
+	</ul></li>
+</ul>
+<h2>Changes from M20 to M21</h2>
+<ul>
+	<li>All applications:<ul>
+	<li>Applications now launch correctly on Mac OS X when they are located in a 
+	path containing a space.</li>
+</ul>
+	<li>Rainbow:<ul>
+	<li>Added the <code>-log</code> option to specify result log file. 
+	By default the log file is {user.home}\rainbowBatchLog.txt</li>
+</ul>
+	</li>
+	<li>Tikal:<ul>
+	<li>Added the <code>-safe</code> option to prompt user when overriding a 
+	directory when extracting.</li>
+</ul>
+	</li>	
+	<li>Filters:<ul>
+	<li>ITS Filters (XML Filter and HTML5+ITS Filter):<ul>
+		<li>Continued implementation of ITS 2.0 (See
+		<a href="http://www.opentag.com/okapi/wiki/index.php?title=ITS_Components">http://www.opentag.com/okapi/wiki/index.php?title=ITS_Components</a> for 
+	details)</li>
+		<li>Added support for HTML5 translate=&quot;&quot; (same as translate=&quot;yes&quot;).</li>
+	</ul></li>
+	<li>XLIFF Filter:<ul>
+	<li>Continued implementation of ITS 2.0.</li>
+	<li>Added support for <code>okp:engine</code> attribute in <code>&lt;alttrans&gt;</code>.</li>
+</ul>
+	</li>
+	<li>Wiki Filter:<ul>
+	<li>Fixed issue #315: WikiFilter didn&#39;t work with preserve_whitespace: true.</li>
+</ul>
+	</li>
+	<li>Regex Filter:<ul>
+	<li>Improved the macStrings default settings to include slash+star comments 
+	with next extracted string.</li>
+</ul>
+	</li>
+	<li>IDML Filter:<ul>
+	<li>Fixed issue #316: Added default to not extract hidden layers and added the option &quot;Extract 
+	hidden layers&quot;.</li>
+	<li>Enabled the option &quot;Create new paragraphs on hard returns&quot;.<br>
+	<b>Important: This option is still BETA and may prevent you to merge back 
+	the extracted file. Make sure to test the round-trip before using this 
+	option for real projects.</b></li>
+</ul>
+	</li>
+	<li>TMX Filter:<ul>
+		<li>Fixed a bug where attribute values on &lt;tuv&gt; elements were being
+		written back to the skeleton without proper escaping.</li>
+		<li>Improved filter performance.</li>
+</ul>
+	</li>
+	<li>Properties Filter:<ul>
+	<li>Fixed issue #313 where the extended characters were not escaped when 
+	using the sub-filter.</li>
+</ul>
+	</li>
+	<li>TS Filter:<ul>
+	<li>Changed the instantiation of the XML parser to use Woodstox.</li>
+</ul>
+	</li>
+	<li>XML Stream Filter (Abstract Markup Filter):<ul>
+        <li>Fixed issue #303: When using the global_pcdata_subfilter option, the filter will no longer generate extra segments consisting only of placeholders.</li>
+</ul>
+	</li>
+</ul>
+	</li>
+	<li>Steps:<ul>
+	<li>Microsoft Batch Translation Step:<ul>
+	<li>Added support for the <code>${domain}</code> variable for the category.</li>
+	<li>Added support for <code>${rootDir}</code> and other variables for the 
+	path of the Engine mapping file.</li>
+</ul>
+	</li>
+	<li>Quality Check Step:<ul>
+	<li>Added option to save or not the session. This option is not accessible 
+	when editing the parameters from CheckMate, but only when editing a step&#39;s 
+	parameters.</li>
+</ul>
+	</li>
+    <li>Rainbow Translation Kit Creation Step:<ul>
+	<li>Added to XLIFF outputs the option of outputting <code>ctype</code> and
+	<code>equiv-text</code> attributes in inline codes.</li>
+	<li>Added to OmegaT output the output of <code>ctype</code> and <code>
+	equiv-text</code> attributes in inline codes.</li>
+	<li>Added the option to merge a new OmegaT translation kit with an existing
+	one, rather than overwriting it.</li>
+</ul>
+    </li>
+	<li>Enrycher Step:<ul>
+	<li>Added support for segmented text units and implemented handling of 
+	inline codes.</li>
+	<li>Added parameter for number of events to process on each call to the 
+	service.</li>
+</ul>
+    </li>
+	<li>Translation Comparison Step:<ul>
+	<li>Added option to log the average scores per documents in a tab-delimited 
+	file.</li>
+	<li>Added the output of a new tab-delimited file with all scores, along with 
+	the HTML report.</li>
+	<li>Extended the repartition table to use 11 brackets instead of 3, and 
+	include the two scores.</li>
+</ul>
+    </li>
+	<li>Segmentation and Desegmentation Steps:<ul>
+    <li>Added the option to renumber code IDs after segmentation so that they 
+        are 1-indexed as much as possible.  A corresponding option on the 
+        desegmentation step reverses the process.  This option will not 
+        work correctly with formats that use non-consecutive or non-numeric
+        code IDs, such as XLIFF.</li>
+</ul>
+    </li>
+</ul>
+	</li>
+	<li>Connectors:<ul>
+	<li>Microsoft Translator Connector:<ul>
+	<li>Added information about the engine in the query results.</li>
+</ul>
+	</li>
+</ul>
+	</li>
+	<li>Libraries:<ul>
+	<li>Continued implementation of ITS 2.0 in XLIFF Writer.</li>
+	<li>Changed options settings for the XLIFFWriter class to use an object 
+	rather than multiple setters.</li>
+</ul>
+	</li>
+	<li>Filters Plugin for OmegaT:<ul>
+	<li>Fixed issue #322: Updated the TS filter to use the Woodstox parser, and 
+	added the dependencies.</li>
+	<li>Added the XLIFF Filter to the plug-in.</li>
+	<li>Added basic support for some ITS data categories in the Comments pane 
+	(Text Analysis, Terminology).</li>
+</ul>
+	</li>
+</ul>
+<h2>Changes from M19 to M20</h2>
 <ul>
 	<li>Rainbow:<ul>
 	<li>Improved the logging output and UI responsivness during lengthy 
 	processes.</li>
 	<li>Updated the user&#39;s preference dialog to allow the selection of the log 
 	levels as defined by SLF4J (Normal, Debug, Trace)</li>
+	<li>Rainbow&#39;s input root directory now supports expansion of system 
+	environment variables.</li>
 </ul>
 	</li>
 	<li>Tikal:<ul>
@@ -40,6 +225,7 @@ distribution.</p>
         elapsed time is included in the batch summary.</li>
     <li>Added the -pd option to specify a directory to search for custom
         filter configurations.</li>
+    <li>Fixed a crash when merging (-m) a file with no extension.</li>
 </ul>
 	</li>
 	<li>Filters:<ul>

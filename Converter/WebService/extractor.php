@@ -17,6 +17,7 @@ static public function endsWith($string, $input)
 
 public static function extract($data,$filename,$jobid, $rules=null){
 
+    
     $resourceFilename;
     //echo "in extractor <br>";
     $urlSettings = new Settings();
@@ -111,13 +112,18 @@ public static function extract($data,$filename,$jobid, $rules=null){
     
     file_put_contents("$uploads/$jobid/$resourceFilename", $rules);
     echo shell_exec("tikel/xliff$version/tikal.sh {$argString} -x -ie UTF-8 -oe UTF-8 $uploads/$jobid/$filename");
-
-
+    echo "helllllo";
+    
+    echo "<br>";
+    echo "tikel/xliff$version/tikal.sh {$argString} -x -ie UTF-8 -oe UTF-8 $uploads/$jobid/$filename";
+    echo "<br>";
+    
     echo shell_exec("sudo chmod 777 ./$uploads/$jobid/*");
 
 
     $xliff = file_get_contents($uploads."$jobid/$filename.xlf");
     //echo $xliff;
+    
     return $xliff;
 	
 }
